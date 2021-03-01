@@ -1,0 +1,37 @@
+extends layout
+
+block content
+    a(href="/") Home
+    
+    form(id='regworld' action='/world/regworld' method='post')
+        table
+            tr
+                td Country
+                td
+                    input(type='text' name='name' required)
+            tr
+                td Country code
+                td
+                    input(type='text' name='countrycode' required)
+            tr
+                td Continent
+                td
+                    select(name='continent', id='')
+                        each val in continents
+                            option=val.name
+
+            tr 
+                td Gov form
+                td
+                    select(name='governmentform', id='')
+                        each val in governmentforms
+                            option=val.name
+
+            tr
+                td Population
+                td
+                    input(type='number' name='population' required)
+            tr
+                td
+                td
+                    input(type='submit' value='Submit')

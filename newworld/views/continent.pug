@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    li
+        a(href="/") Home
+    li
+        a(href="/world/createWorld") Create/update
+
+    p select continent
+    ul
+        form(id='continentForm' action='/continent' method='post')
+            select(name='continent', id='')
+                each val in continents
+                    option=`${val.name}`
+            input(type='submit' value='Search')

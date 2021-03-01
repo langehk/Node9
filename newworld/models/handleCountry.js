@@ -2,6 +2,7 @@
 const mon = require("../db/mongoWrap");
 const dbServer = "localhost";
 const dbName = "world";
+const Country = require('./country-model');
 
 exports.getCountries = async function (res) {
     try {
@@ -18,13 +19,13 @@ exports.getCountries = async function (res) {
 
 exports.postCountry = async function (req, res, next) {
     let chk = { name: req.body.name };  // check object for existence
-    let country = {                     // create obejct in db-format
+    let country =  new Country({                     // create obejct in db-format
         name: req.body.name,
         continent: req.body.continent,
         population: req.body.population,
         governmentform: req.body.governmentform,
         countrycode: req.body.countrycode
-    };
+    });
     if (req.body.localname === "") country.localname = country.name;
     console.log(req.body);
     try {

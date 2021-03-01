@@ -1,0 +1,9 @@
+extends layout
+
+block content
+    li
+        a(href="/") Home
+    
+    p here are the languages spoken in #{querycontinent}:
+    each value in languages
+        li= `${value.language}`

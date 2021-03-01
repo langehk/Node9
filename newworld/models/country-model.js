@@ -9,3 +9,4 @@ const CountryModel = new mongoose.Schema({
 });
 
 module.exports = mongoose.model("Country", CountryModel, "country");
+

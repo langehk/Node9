@@ -1,0 +1,11 @@
+extends layout
+
+block content
+    a(href="/") Home
+
+    p #{querylanguage} occurs #{ranking} times!
+
+    ul
+        each obj in languages
+            each value in obj
+                li= `${value}`

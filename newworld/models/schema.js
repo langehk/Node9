@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const CountryLanguageModel = new mongoose.Schema({
     countrycode: String,
     language: String,
-    isofficial: String, 
-    percentage: Number
+    isofficial: String
 });
 
 const Countrylanguage = mongoose.model("Countrylanguage", CountryLanguageModel, "countrylanguage");

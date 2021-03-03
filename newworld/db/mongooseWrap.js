@@ -82,14 +82,12 @@ exports.upsert = async function (obj) {
 }
 
 exports.retrieveAggregate = async function(Model, query) {
+    
     const db = await connect("localhost", "world");
 
     let stuff = null;
     try {
-        stuff = await Model.aggregate({$group: {language: "$language", count : {$sum:1}}});
-        console.log(stuff);
-        //stuff = await db.collection(coll).aggregate([{$group: {language: "$language", count : {$sum:1}}}]).toArray();
-        
+        stuff = await db.collection("countrylanguage").aggregate(query).toArray();
     } catch(err) {
         console.log(error);
     } finally {

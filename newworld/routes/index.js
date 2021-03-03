@@ -26,4 +26,17 @@ router.get('/ranking', function(req, res, next) {
   handler.getLanguagesAndRanking(res);
 });
 
+/* GET users listing. */
+router.get('/ranking/searchRanking', function(req, res, next) {
+  handler.GetSearchRanking(res);
+});
+
+/* GET users listing. */
+router.post('/ranking', function(req, res, next) {
+  handler.searchRanking(res, req.body.language);
+});
+
+
+
+
 module.exports = router;

@@ -19,6 +19,24 @@ exports.getLanguagesAndRanking = async function (res) {
     }
 }
 
+
+exports.GetSearchRanking = async function (res) {
+    try {
+        
+        let languages = await mongoose.retrieveDistinct("language");
+        
+        //let languages = await mongoose.retrieveAggregate(model.Countrylanguage);
+        //let languages = await mon.retrieveAggregate(dbServer, dbName, "countrylanguage", {$group: {language: "$language", count : {$sum:1}}});
+        res.render('searchRanking', {
+            title: "Country",
+            languages: languages
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 exports.getGovernmentAndContinentsforms = async function (res) {
     try {
         let gov = await mon.retrieve(model.Governmentform);
@@ -106,4 +124,39 @@ exports.postCountry = async function (req, res, next) {
         console.log(e);
     }
 }
+
+
+exports.searchRanking = async function(res, searchedLanguage){
+    
+    try {
+        
+        //let lang = await mon.retrieve(model.Countrylanguage, {"language": searchedLanguage}); // Henter de forekomster hvor x language er anvendt.
+        let languageCount = await mon.retrieveAggregate(model.Countrylanguage, [
+            {
+              $group: {
+                _id: '$language',
+                count: { $sum: 1 } // Tæller antallet.
+              }
+            },
+            { $sort: { count: -1 } }  //Sorteret.
+          ]);
+        
+        const found = languageCount.find( x => x._id === searchedLanguage); // Antallet af languages.
+          
+        let rank = await mon.retrieve(model.Countrylanguage,  {"language": searchedLanguage});
+        
+        console.log(languageCount);
+        res.render('showSearchedRanking', {
+            title: "lang",
+            ranking: found.count,
+            querylanguage: searchedLanguage,
+            languages : languageCount
+        });
+        
+    } catch (e) {
+        console.log(e);
+    }
+}
+
+
 

@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 
-const LanguageModel = new mongoose.Schema({
+const CountryLanguageModel = new mongoose.Schema({
     countrycode: String,
     language: String,
     isofficial: String, 
     percentage: Number
 });
 
-const Countrylanguage = mongoose.model("Countrylanguage", LanguageModel, "countrylanguage");
+const Countrylanguage = mongoose.model("Countrylanguage", CountryLanguageModel, "countrylanguage");
 
 const GovernmentformModel = new mongoose.Schema({ name: String });
   

@@ -53,7 +53,7 @@ exports.retrieveAndSort = async function (Model, sort) {
     }
 }
 
-exports.retrieveDistinct = async function (url, dbn, Model, query) {
+exports.retrieveDistinct = async function (query) {
     const db = await connect("localhost", "world");
     let stuff = null;
     
@@ -61,10 +61,7 @@ exports.retrieveDistinct = async function (url, dbn, Model, query) {
         console.log("Connected")
     });
 
-    await Model.find().distinct(query, function (err, items) {
-        stuff = items;
-
-    });
+    stuff = await db.collection("countrylanguage").distinct(query);
     return stuff
 }
 
@@ -84,12 +81,12 @@ exports.upsert = async function (obj) {
     }
 }
 
-exports.retrieveAggregate = async function(url, dbn, Model, query) {
+exports.retrieveAggregate = async function(Model, query) {
     const db = await connect("localhost", "world");
 
     let stuff = null;
     try {
-        stuff = await Model.aggregate(query);
+        stuff = await Model.aggregate({$group: {language: "$language", count : {$sum:1}}});
         console.log(stuff);
         //stuff = await db.collection(coll).aggregate([{$group: {language: "$language", count : {$sum:1}}}]).toArray();
         

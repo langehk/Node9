@@ -1,18 +1,18 @@
 "use strict";
 const mongoose = require("../db/mongooseWrap");
-const dbServer = "localhost";
-const dbName = "world";
 const model = require("./schema");
 const mon = require("../db/mongooseWrap");
 
 exports.getLanguagesAndRanking = async function (res) {
     try {
-
-        let languages = await mongoose.retrieveAggregate(model.Countrylanguage);
+        let languages = await mongoose.retrieveDistinct("language");
+        let amount = languages.length;
+        //let languages = await mongoose.retrieveAggregate(model.Countrylanguage);
         //let languages = await mon.retrieveAggregate(dbServer, dbName, "countrylanguage", {$group: {language: "$language", count : {$sum:1}}});
         res.render('ranking', {
             title: "Country",
-            languages: languages
+            languages: languages,
+            total : amount
         });
     } catch (e) {
         console.log(e);

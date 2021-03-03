@@ -5,4 +5,8 @@ block content
         a(href="/") Home
     
     p Ranking:
+    p Total number of languages #{total}
     ul
+        each lang in languages
+            ul
+                li #{lang}

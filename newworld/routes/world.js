@@ -1,25 +1,24 @@
 var express = require('express');
 var router = express.Router();
 const mon = require("../db/mongoWrap");
-const modGovernmentform = require("../models/handleGovernmentForm");
-const modCountry = require("../models/handleCountry");
+const handler = require("../models/handler");
 
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-	modCountry.getCountries(res);
+	handler.getCountries(res);
 });
 
 
 /* GET users listing. */
 router.get('/createWorld', function(req, res, next) {
-    modGovernmentform.getGovernmentAndContinentsforms(res);
+    handler.getGovernmentAndContinentsforms(res);
 });
 
 
 
 router.post('/regworld', async function(req, res, next) {
-	modCountry.postCountry(req,res,next);
+	handler.postCountry(req,res,next);
 	/*mon.upsert("localhost", "world", "countries", req.body, {name: req.body.name} )
 		.then ( function (rc) {
 			if (rc)

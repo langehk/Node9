@@ -34,3 +34,23 @@ exports.upsert = async function(url, dbn, coll, query, chk) {
         return stuff;
     }
 }
+
+
+exports.retrieveAggregate = async function(url, dbn, coll, query) {
+    const constr = `mongodb://${url}:27017`;
+    const con = await mongo.connect(constr, conparam);
+    const db = con.db(dbn);
+    let stuff = null;
+    try {
+        stuff = await db.collection(coll).aggregate([
+            {$match: {}},
+            {$group: {_id: "$language"}}
+        ]);
+
+    } catch(err) {
+        console.log(error);
+    } finally {
+        con.close();
+        return stuff;
+    }
+}

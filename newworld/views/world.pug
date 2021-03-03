@@ -6,8 +6,18 @@ block content
     li
         a(href="/world/createWorld") Create/update
 
-    ul
-    each obj in countries
-        each value, key in obj
-            li= `${key}: ${value}`
-        br
+    table
+        each country in countries
+            tr
+                td Name
+                td #{country.name}
+            tr
+                td Code
+                td #{country.code}
+            tr
+                td Pop
+                td #{country.population}
+            tr
+                td Gov
+                td #{country.governmentform}
+                    hr

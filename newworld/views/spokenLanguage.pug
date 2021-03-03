@@ -10,5 +10,5 @@ block content
 
 
     p here are the languages spoken in #{querycontinent}:
-    each value in languages
-        li= `${value.language}`
+    each language in languages
+        p #{language}

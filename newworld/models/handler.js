@@ -145,7 +145,6 @@ exports.searchRanking = async function(res, searchedLanguage){
           
         let rank = await mon.retrieve(model.Countrylanguage,  {"language": searchedLanguage});
         
-        console.log(languageCount);
         res.render('showSearchedRanking', {
             title: "lang",
             ranking: found.count,

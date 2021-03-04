@@ -3,6 +3,7 @@ extends layout
 block content
     a(href="/") Home
     ul
+    p Search for a language:
     form(id='languageForm' action='/ranking' method='post')
         input(type='text' name='language' required)
 

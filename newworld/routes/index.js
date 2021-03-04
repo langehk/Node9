@@ -36,6 +36,13 @@ router.post('/ranking', function(req, res, next) {
   handler.searchRanking(res, req.body.language);
 });
 
+/* GET users listing. */
+router.get('/group', function(req, res, next) {
+  handler.GetGroupedCountries(res);
+});
+
+
+
 
 
 

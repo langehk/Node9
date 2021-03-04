@@ -65,6 +65,20 @@ exports.retrieveDistinct = async function (query) {
     return stuff
 }
 
+exports.retrieveGroupedCountryDistinct = async function (query) {
+    const db = await connect("localhost", "world");
+    let stuff = null;
+    
+    db.once("open", function () {
+        console.log("Connected")
+    });
+
+    stuff = await db.collection("country").distinct(query);
+    return stuff
+}
+
+
+
 
 exports.upsert = async function (obj) {
     const db = await connect("localhost", "world");

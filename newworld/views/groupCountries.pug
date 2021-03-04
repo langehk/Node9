@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    li
+        a(href="/") Home
+
+    p Grouped countries pr. continent:
+    ul
+    table
+        tr
+            each continent in continents
+                th #{continent.name}
+                    each obj in continent.countries
+                        tr
+                            td #{obj}
+
